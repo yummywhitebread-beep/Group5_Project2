@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: dim_location
+    columns:
+      - name: location_key
+        data_tests:
+          - not_null
+          - unique
+
+  - name: dim_project
+    columns:
+      - name: project_key
+        data_tests:
+          - not_null
+          - unique
+      - name: completion_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['COMPLETED', 'UNCOMPLETED', 'UNKNOWN']

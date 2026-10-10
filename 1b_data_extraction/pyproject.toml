@@ -1,0 +1,6 @@
+[project]
+name = "property-transaction-ingestion"
+version = "0.1.0"
+description = "Meltano pipeline loading property transactions from DuckDB to BigQuery"
+requires-python = ">=3.11,<3.12"
+dependencies = ["meltano>=4,<5"]

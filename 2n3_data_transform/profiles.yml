@@ -1,0 +1,11 @@
+property_transaction_warehouse:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('BIGQUERY_PROJECT', 'ringed-griffin-509403-b4') }}"
+      dataset: "{{ env_var('BIGQUERY_DATASET', 'propery_trans1') }}"
+      threads: 4
+      priority: interactive
+

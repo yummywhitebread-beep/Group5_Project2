@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: fact_transaction
+    columns:
+      - name: transaction_key
+        data_tests:
+          - not_null
+          - unique
+      - name: project_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_project')
+                field: project_key
+      - name: location_key
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_location')
+                field: location_key
+      - name: new_trans_price
+        description: Transaction price calculated as area_sqft multiplied by unit_price_psf.

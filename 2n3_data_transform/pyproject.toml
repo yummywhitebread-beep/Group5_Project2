@@ -1,0 +1,9 @@
+[project]
+name = "property-transaction-warehouse"
+version = "0.1.0"
+description = "dbt BigQuery warehouse models for property transactions"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "dbt-bigquery>=1.8,<2",
+]
+

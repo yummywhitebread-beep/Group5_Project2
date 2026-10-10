@@ -1,0 +1,16 @@
+name: property_transaction_warehouse
+version: "1.0.0"
+config-version: 2
+
+profile: property_transaction_warehouse
+
+model-paths: ["model"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  property_transaction_warehouse:
+    +materialized: table
+
