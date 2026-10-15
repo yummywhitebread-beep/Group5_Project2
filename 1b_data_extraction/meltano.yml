@@ -1,0 +1,29 @@
+default_environment: dev
+
+environments:
+- name: dev
+
+plugins:
+  extractors:
+  - name: tap-duckdb
+    variant: meltanolabs
+    pip_url: "git+https://github.com/MeltanoLabs/tap-duckdb.git setuptools<81"
+    config:
+      path: ../Output/property_trans.db
+    select:
+    - main-*.*
+
+  loaders:
+  - name: target-bigquery
+    variant: z3z1ma
+    pip_url: git+https://github.com/z3z1ma/target-bigquery.git
+    config:
+      project: ringed-griffin-509403-b4
+      dataset: propery_trans1
+      denormalized: true
+      schema_resolver_version: 2
+      overwrite: true
+      stream_maps:
+        main-property_transactions:
+          __alias__: raw_property_trans
+project_id: 01a105ee-b227-74ea-8fd5-80e70ed7d147

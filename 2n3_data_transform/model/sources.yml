@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: property_transactions
+    database: "{{ env_var('BIGQUERY_PROJECT', 'ringed-griffin-509403-b4') }}"
+    schema: "{{ env_var('BIGQUERY_DATASET', 'propery_trans1') }}"
+    tables:
+      - name: raw_property_trans
+

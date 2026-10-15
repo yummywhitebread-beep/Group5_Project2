@@ -1,0 +1,6 @@
+.env
+.venv/
+.meltano/
+meltano.db
+logs/
+run/
