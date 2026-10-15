@@ -1,0 +1,166 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Pipeline architecture" id="pipeline-arch-1">
+    <mxGraphModel dx="2926" dy="1140" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1050" background="#131a2b" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontColor=#ffffff;" value="&lt;b style=&quot;font-size:26px;color:#ffffff&quot;&gt;Singapore Private Property Data Pipeline Architecture&lt;/b&gt;" vertex="1">
+          <mxGeometry height="34" width="900" x="61" y="35" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontColor=#8b93a7;" value="&lt;span style=&quot;font-size:13px;color:#8b93a7&quot;&gt;Every hop, with the column count at each stage and the tests that guard it&lt;/span&gt;" vertex="1">
+          <mxGeometry height="22" width="900" x="63" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="csv" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#8b93a7;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#8b93a7;font-size:14px&quot;&gt;19 CSV files&lt;/b&gt;&lt;br&gt;&lt;br&gt;Data/Raw_data/&lt;br&gt;21 cols &amp;#183; text&lt;br&gt;170,224 rows" vertex="1">
+          <mxGeometry height="125" width="250" x="63" y="154" as="geometry" />
+        </mxCell>
+        <mxCell id="duck" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#e0a458;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#e0a458;font-size:14px&quot;&gt;property_transactions&lt;/b&gt;&lt;br&gt;&lt;br&gt;DuckDB &amp;#183; local&lt;br&gt;170,224 &amp;#215; 21 &amp;#183; VARCHAR" vertex="1">
+          <mxGeometry height="125" width="260" x="423" y="154" as="geometry" />
+        </mxCell>
+        <mxCell id="bqraw" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#4ecdc4;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#4ecdc4;font-size:14px&quot;&gt;raw_property_trans&lt;/b&gt;&lt;br&gt;&lt;br&gt;BigQuery&lt;br&gt;21 cols &amp;#183; still text" vertex="1">
+          <mxGeometry height="125" width="260" x="793" y="154" as="geometry" />
+        </mxCell>
+        <mxCell id="stg" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#4ecdc4;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#4ecdc4;font-size:14px&quot;&gt;stg_property_transactions&lt;/b&gt;&lt;br&gt;&lt;br&gt;BigQuery &amp;#183; dbt&lt;br&gt;&lt;b&gt;21 columns &amp;#8212; typed in SQL&lt;/b&gt;&lt;br&gt;SAFE_CAST &amp;#183; SAFE.PARSE_DATE&lt;br&gt;&lt;br&gt;&lt;span style=&quot;color:#ef8c6d&quot;&gt;11 dbt tests&lt;/span&gt;" vertex="1">
+          <mxGeometry height="125" width="300" x="1163" y="154" as="geometry" />
+        </mxCell>
+        <mxCell id="tests" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#ef8c6d;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#ef8c6d;font-size:14px&quot;&gt;dbt tests &amp;#183; 20&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;11 staging &amp;#183; 5 fact &amp;#183; 2 + 2 dimensions&lt;/b&gt;&lt;br&gt;&lt;br&gt;model/schema.yml &amp;#8212; 15&lt;br&gt;model/star/schema.yml &amp;#8212; 4&lt;br&gt;tests/*.sql &amp;#8212; 1&lt;br&gt;&lt;br&gt;unique &amp;#183; not_null &amp;#183; relationships&lt;br&gt;accepted_values &amp;#183; custom SQL&lt;br&gt;&lt;br&gt;&lt;span style=&quot;color:#8b93a7;font-size:10px&quot;&gt;&lt;b&gt;runs as SQL inside BigQuery&lt;/b&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="225" width="300" x="48" y="336" as="geometry" />
+        </mxCell>
+        <mxCell id="dimproj" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#4ecdc4;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#4ecdc4;font-size:14px&quot;&gt;dim_project&lt;/b&gt;&lt;br&gt;&lt;br&gt;5 columns &amp;#183; project_key&lt;br&gt;&lt;br&gt;&lt;span style=&quot;color:#ef8c6d&quot;&gt;2 dbt tests&lt;/span&gt;" vertex="1">
+          <mxGeometry height="95" width="260" x="423" y="384" as="geometry" />
+        </mxCell>
+        <mxCell id="dimloc" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#4ecdc4;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#4ecdc4;font-size:14px&quot;&gt;dim_location&lt;/b&gt;&lt;br&gt;&lt;br&gt;7 columns &amp;#183; location_key&lt;br&gt;&lt;br&gt;&lt;span style=&quot;color:#ef8c6d&quot;&gt;2 dbt tests&lt;/span&gt;" vertex="1">
+          <mxGeometry height="95" width="260" x="423" y="504" as="geometry" />
+        </mxCell>
+        <mxCell id="fact" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#4ecdc4;strokeWidth=2.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#4ecdc4;font-size:14px&quot;&gt;fact_transaction&lt;/b&gt;&lt;br&gt;&lt;br&gt;16 columns &amp;#183; transaction_key + 2 FKs&lt;br&gt;one row per source transaction&lt;br&gt;&lt;br&gt;&lt;span style=&quot;color:#ef8c6d&quot;&gt;5 dbt tests&lt;/span&gt;" vertex="1">
+          <mxGeometry height="125" width="290" x="833" y="429" as="geometry" />
+        </mxCell>
+        <mxCell id="gx" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#ef8c6d;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#ef8c6d;font-size:14px&quot;&gt;Great Expectations &amp;#183; 15&lt;/b&gt;&lt;br&gt;&lt;br&gt;all 15 run on fact_transaction&lt;br&gt;&lt;br&gt;ranges &amp;#183; uniqueness &amp;#183; reconciliation&lt;br&gt;percentage_difference within &amp;#177;2.5%&lt;br&gt;&lt;br&gt;&lt;span style=&quot;color:#8b93a7;font-size:10px&quot;&gt;&lt;b&gt;runs in pandas on your machine&lt;/b&gt;&lt;br&gt;the table is pulled out of BigQuery first&lt;/span&gt;" vertex="1">
+          <mxGeometry height="175" width="300" x="1235" y="389" as="geometry" />
+        </mxCell>
+        <mxCell id="a06" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#9b8cc4;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#9b8cc4;font-size:14px&quot;&gt;06 &amp;#183; Price &amp;amp; volume&lt;/b&gt;&lt;br&gt;&lt;br&gt;sale_date &amp;#215; unit_price_psf&lt;br&gt;monthly median" vertex="1">
+          <mxGeometry height="110" width="320" x="63" y="724" as="geometry" />
+        </mxCell>
+        <mxCell id="a07" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#9b8cc4;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#9b8cc4;font-size:14px&quot;&gt;07 &amp;#183; Top 10 projects&lt;/b&gt;&lt;br&gt;&lt;br&gt;project_name &amp;#215; count" vertex="1">
+          <mxGeometry height="110" width="320" x="443" y="724" as="geometry" />
+        </mxCell>
+        <mxCell id="a08" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#9b8cc4;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#9b8cc4;font-size:14px&quot;&gt;08 &amp;#183; Location&lt;/b&gt;&lt;br&gt;&lt;br&gt;planning_region &amp;#215; unit_price_psf&lt;br&gt;regional median" vertex="1">
+          <mxGeometry height="110" width="320" x="823" y="724" as="geometry" />
+        </mxCell>
+        <mxCell id="a09" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#1b2436;strokeColor=#9b8cc4;strokeWidth=1.5;fontColor=#c8d0dc;fontSize=11;verticalAlign=middle;" value="&lt;b style=&quot;color:#9b8cc4;font-size:14px&quot;&gt;09 &amp;#183; Buyer mix&lt;/b&gt;&lt;br&gt;&lt;br&gt;purchaser_address_indicator" vertex="1">
+          <mxGeometry height="110" width="320" x="1203" y="724" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="csv" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5a6680;strokeWidth=1.5;endArrow=blockThin;endFill=1;fontColor=#8b93a7;fontSize=10;labelBackgroundColor=none;" target="duck" value="pipeline.ipynb">
+          <mxGeometry relative="1" x="-0.0182" y="-12" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="duck" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5a6680;strokeWidth=1.5;endArrow=blockThin;endFill=1;fontColor=#8b93a7;fontSize=10;labelBackgroundColor=none;" target="bqraw" value="Meltano">
+          <mxGeometry relative="1" x="0.0545" y="-11" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="bqraw" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5a6680;strokeWidth=1.5;endArrow=blockThin;endFill=1;fontColor=#8b93a7;fontSize=10;labelBackgroundColor=none;" target="stg" value="dbt source()">
+          <mxGeometry relative="1" x="0.0182" y="-9" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="stg" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5a6680;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="dimproj">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1313" y="334" />
+              <mxPoint x="393" y="334" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="stg" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5a6680;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="dimloc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1313" y="334" />
+              <mxPoint x="393" y="334" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="dimproj" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5a6680;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="fact">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="dimloc" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5a6680;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="fact">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="gx" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#ef8c6d;strokeWidth=1.5;endArrow=blockThin;endFill=1;fontColor=#ef8c6d;fontSize=10;labelBackgroundColor=none;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="fact" value="reads">
+          <mxGeometry relative="1" x="0.121" y="11" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1158" y="506.5" />
+              <mxPoint x="1158" y="491.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="fact" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5a6680;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="a06">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="978" y="644" />
+              <mxPoint x="223" y="644" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="fact" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5a6680;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="a07">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="978" y="644" />
+              <mxPoint x="603" y="644" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="fact" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5a6680;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="a08">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="978" y="644" />
+              <mxPoint x="983" y="644" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" source="fact" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#5a6680;strokeWidth=1.5;endArrow=blockThin;endFill=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="a09">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="978" y="644" />
+              <mxPoint x="1363" y="644" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lg1" parent="1" style="rounded=0;html=1;fillColor=#8b93a7;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="10" width="10" x="1203" y="886" as="geometry" />
+        </mxCell>
+        <mxCell id="lt1" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontColor=#8b93a7;fontSize=11;" value="&lt;span style=&quot;color:#8b93a7;font-size:11px&quot;&gt;source files&lt;/span&gt;" vertex="1">
+          <mxGeometry height="20" width="280" x="1221" y="881" as="geometry" />
+        </mxCell>
+        <mxCell id="lg2" parent="1" style="rounded=0;html=1;fillColor=#e0a458;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="10" width="10" x="1203" y="911" as="geometry" />
+        </mxCell>
+        <mxCell id="lt2" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontColor=#e0a458;fontSize=11;" value="&lt;span style=&quot;color:#e0a458;font-size:11px&quot;&gt;local staging &amp;#183; DuckDB&lt;/span&gt;" vertex="1">
+          <mxGeometry height="20" width="280" x="1221" y="906" as="geometry" />
+        </mxCell>
+        <mxCell id="lg3" parent="1" style="rounded=0;html=1;fillColor=#4ecdc4;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="10" width="10" x="1203" y="936" as="geometry" />
+        </mxCell>
+        <mxCell id="lt3" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontColor=#4ecdc4;fontSize=11;" value="&lt;span style=&quot;color:#4ecdc4;font-size:11px&quot;&gt;warehouse &amp;#183; BigQuery&lt;/span&gt;" vertex="1">
+          <mxGeometry height="20" width="280" x="1221" y="931" as="geometry" />
+        </mxCell>
+        <mxCell id="lg4" parent="1" style="rounded=0;html=1;fillColor=#ef8c6d;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="10" width="10" x="1203" y="961" as="geometry" />
+        </mxCell>
+        <mxCell id="lt4" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontColor=#ef8c6d;fontSize=11;" value="&lt;span style=&quot;color:#ef8c6d;font-size:11px&quot;&gt;data quality&lt;/span&gt;" vertex="1">
+          <mxGeometry height="20" width="280" x="1221" y="956" as="geometry" />
+        </mxCell>
+        <mxCell id="lg5" parent="1" style="rounded=0;html=1;fillColor=#9b8cc4;strokeColor=none;" value="" vertex="1">
+          <mxGeometry height="10" width="10" x="1203" y="986" as="geometry" />
+        </mxCell>
+        <mxCell id="lt5" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontColor=#9b8cc4;fontSize=11;" value="&lt;span style=&quot;color:#9b8cc4;font-size:11px&quot;&gt;analysis output&lt;/span&gt;" vertex="1">
+          <mxGeometry height="20" width="280" x="1221" y="981" as="geometry" />
+        </mxCell>
+        <mxCell id="ew7DoKlYh-uWDRRcuSov-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&#xa;&lt;em style=&quot;color: rgb(191, 191, 191); font-family: -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, sans-serif; font-size: 13px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(18, 19, 20); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;no arrows: these run inside BigQuery, no data move&lt;/em&gt;&#xa;&#xa;" vertex="1">
+          <mxGeometry height="58" width="315" x="48" y="564" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
