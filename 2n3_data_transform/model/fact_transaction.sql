@@ -88,8 +88,7 @@ LEFT JOIN {{ ref('dim_project') }} AS p
     ON t.project_name = p.project_name
     AND t.property_type IS NOT DISTINCT FROM p.property_type
     AND t.tenure IS NOT DISTINCT FROM p.tenure
-    AND t.completion_year IS NOT DISTINCT FROM p.completion_year
-    AND t.completion_status IS NOT DISTINCT FROM p.completion_status
+    AND t.completion_date IS NOT DISTINCT FROM p.completion_date
 LEFT JOIN {{ ref('dim_location') }} AS l
     ON t.address IS NOT DISTINCT FROM l.address
     AND t.postal_code IS NOT DISTINCT FROM l.postal_code

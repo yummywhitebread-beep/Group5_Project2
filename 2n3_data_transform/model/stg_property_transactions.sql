@@ -23,14 +23,5 @@ WITH cleaned AS (
         NULLIF(UPPER(TRIM(planning_area)), '') AS planning_area
     FROM {{ source('property_transactions', 'raw_property_trans') }}
 )
-SELECT
-    *,
-    SAFE_CAST(IF(REGEXP_CONTAINS(completion_date, r'^\d{4}$'), completion_date, NULL) AS INT64) AS completion_year,
-    CASE
-        WHEN UPPER(completion_date) = 'UNCOMPLETED' THEN 'UNCOMPLETED'
-        WHEN REGEXP_CONTAINS(completion_date, r'^\d{4}$') THEN 'COMPLETED'
-        WHEN completion_date IS NULL THEN NULL
-        ELSE 'UNKNOWN'
-    END AS completion_status
+SELECT *
 FROM cleaned
-

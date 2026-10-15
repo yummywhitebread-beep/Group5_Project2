@@ -4,13 +4,13 @@ This dbt project transforms
 `ringed-griffin-509403-b4.propery_trans1.raw_property_trans` into BigQuery
 dimension and fact tables in the same dataset:
 
-- `dim_date`: calendar attributes for sale dates.
+
 - `dim_location`: deduplicated address and planning-area attributes.
 - `dim_project`: deduplicated project, property, tenure, and completion attributes.
 - `fact_transaction`: one row per raw transaction, with typed measures and dimension keys.
 
 The staging model trims and standardizes text, converts comma-formatted numeric
-values safely, parses sale dates, and treats `-` and blank values as null.
+values safely, and treats `-` and blank values as null.
 Unparseable numeric values become null instead of failing the warehouse run.
 Transactions are retained at source-row grain; identical-looking source rows
 are not removed because the source has no verified transaction identifier.

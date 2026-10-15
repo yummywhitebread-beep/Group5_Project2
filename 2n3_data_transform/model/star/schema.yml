@@ -14,8 +14,3 @@ models:
         data_tests:
           - not_null
           - unique
-      - name: completion_status
-        data_tests:
-          - accepted_values:
-              arguments:
-                values: ['COMPLETED', 'UNCOMPLETED', 'UNKNOWN']
