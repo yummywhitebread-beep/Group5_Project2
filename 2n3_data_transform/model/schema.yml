@@ -22,7 +22,45 @@ models:
       - name: new_trans_price
         description: Transaction price calculated as area_sqft multiplied by unit_price_psf.
 
+# --- the numbers must survive SAFE_CAST (empty here = cleaning broke) ---
+      - name: transacted_price
+        data_tests: [not_null]
+      - name: area_sqft
+        data_tests: [not_null]
+      - name: area_sqm
+        data_tests: [not_null]
+      - name: unit_price_psf
+        data_tests: [not_null]
+      - name: unit_price_psm
+        data_tests: [not_null]
+      - name: number_of_units
+        data_tests: [not_null]
 
+      # --- the date must survive SAFE.PARSE_DATE ---
+      - name: sale_date
+        data_tests: [not_null]
+
+      # --- the text must stay inside its known set ---
+      - name: type_of_sale
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['NEW SALE', 'RESALE', 'SUB SALE']
+      - name: property_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['APARTMENT', 'CONDOMINIUM']
+      - name: planning_region
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['CENTRAL REGION', 'EAST REGION', 'NORTH EAST REGION', 'NORTH REGION', 'WEST REGION']
+      - name: purchaser_address_indicator
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['HDB', 'N.A', 'PRIVATE']
 
 
   # ------------------------------------------------------------------
